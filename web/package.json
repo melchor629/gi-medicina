@@ -1,0 +1,19 @@
+{
+  "name": "gi-medicina-web",
+  "version": "1.0.0",
+  "description": "La parte de la aplicación web de gi-medicina",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/melchor629/gi-medicina.git"
+  },
+  "author": "melchor629",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/melchor629/gi-medicina/issues"
+  },
+  "homepage": "https://github.com/melchor629/gi-medicina#readme"
+}
