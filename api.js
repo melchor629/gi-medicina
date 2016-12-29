@@ -1,3 +1,3 @@
-module.exports = app => {
+module.exports = (app, connection) => {
     // >> AQUI VA LA API << \\
 };
