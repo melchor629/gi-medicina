@@ -8,7 +8,7 @@ Proyecto para Gestión de la Información sobre medicinas y esas cosas
     | api.js
     | index.js
     | package.json
-    \ models
+    \ entities
         | Readme.md
         | medicamento.js
         | permiso.js
