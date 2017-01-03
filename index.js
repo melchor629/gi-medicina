@@ -26,7 +26,7 @@ typeorm.createConnection({
         database: 'medicina'
     },
     entities: [
-        __dirname + '/models/*.js'
+        __dirname + '/entities/*.js'
     ],
     autoSchemaSync: true
 }).then(connection => require('./api.js')(app, connection))

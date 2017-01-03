@@ -17,13 +17,24 @@ Proyecto para Gestión de la Información sobre medicinas y esas cosas
         | pantalla.js
         | rol.js
         | ...
+    \ models
+        | Readme.md
+        | medicamento.js
+        | permiso.js
+        | usuario.js
+        | laboratorio.js
+        | pantalla.js
+        | rol.js
+        | ...
     \ web
         | package.json
         | index.html
         | ...
 ```
 
-**models**: Contiene el mapeo BD-node.js de las tablas
+**entities**: Contiene el mapeo BD-node.js de las tablas
+
+**models**: Contiene objetos que representan las tablas de la BD
 
 **web**: Contiene la aplicación web para manejar la BD
 
