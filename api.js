@@ -57,4 +57,15 @@ module.exports = (app, connection) => {
     
     
     });
+    
+    //ruta laboratorios
+    app.get('/laboratorios',(req,res)=>{
+        let labRepo = connection.getRepository("laboratorio");
+        //obtenemos una lista de medicamentos
+        labRepo.find().then(r => {
+            res.json(r);
+        }).catch(e => {
+            res.status(500).end(require('util').inspect(e));
+        });
+    });
 };
