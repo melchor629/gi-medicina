@@ -13,6 +13,9 @@ module.exports = {
         },
         CANTIDAD_DISPONIBLE: {
             type: "int"
+        },
+        LABORATORIO: {
+            type: "int"
         }
     },
 

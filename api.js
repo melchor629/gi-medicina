@@ -17,14 +17,7 @@ module.exports = (app, connection) => {
     app.get('/datos_medicamentos',(req,res)=>{
         let mediRepo = connection.getRepository("medicamento");
         //obtenemos una lista de medicamentos
-        mediRepo.find({
-            //Esto sirve para hacer el join automático
-            //puede que sobre (comentar a todos)
-            alias: "medicamento",
-            innerJoinAndSelect: {
-                "metadata": "medicamento.LABORATORIO"
-            }
-        }).then(r => {
+        mediRepo.find().then(r => {
             //le pasamos la informacion al servidor en este caso
             //la lista de medicamentos. Transformamos medicamentos
             //a JSON porque vamos a trabajar con esto.

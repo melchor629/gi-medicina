@@ -11,9 +11,10 @@ module.exports = {
         modificacion: {
             type: "int"
         },
-
-        rolName: { primary: true, type: "string" },
-        pantalla: { primary: true, type: "string" }
+        pantalla: {
+            primary: true,
+            type: "string"
+        }
         
     },
 
