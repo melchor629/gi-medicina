@@ -1,4 +1,4 @@
-class Medicamento{
+class medicamento{
 
     constructor(id, nombre,cantidad,laboratorio){
         this.id=id;
@@ -9,4 +9,4 @@ class Medicamento{
     
 }
 
-module.exports.Medicamento=Medicamento;
+module.exports=medicamento;

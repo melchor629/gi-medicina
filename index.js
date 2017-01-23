@@ -23,28 +23,35 @@ typeorm.createConnection({
         port: 3306,
         username: 'root',
         password: 'pato',
-        database: 'medicina'
+        database: 'medicina',
     },
-    entities: [
-        __dirname + '/entities/*.js'
+    entitySchemas: [
+        require('./entities/laboratorio.js'),
+        require('./entities/medicamento.js'),
+        require('./entities/pantalla.js'),
+        require('./entities/permiso.js'),
+        require('./entities/rol.js'),
+        require('./entities/usuario.js'),
     ],
-    autoSchemaSync: true
-}).then(connection =>{ 
-require('./api.js')(app, connection)
-app.listen(8080, () => console.log('Servidor escuchando en http://localhost:8080'))})
+    usedNamingStrategy: 'camelCase'
+}).then(connection => { 
+    require('./api.js')(app, connection);
+
+    //Error 404
+    app.use((req, res, next) => {
+        res.status(404).end("Error 404 :(");
+    });
+
+    //Error interno -> 500
+    app.use((err, req, res, next) => {
+        console.error(err);
+        res.status(500).end("Error interno<br>" + require('util').inspect(err));
+    });
+
+    app.listen(8080, () => console.log('Servidor escuchando en http://localhost:8080'));
+})
 .catch(error => {
     console.error(error);
     process.exit(1);
-});
-
-//Error 404
-app.use((req, res, next) => {
-    res.status(404).end("Error 404 :(");
-});
-
-//Error interno -> 500
-app.use((err, req, res, next) => {
-    console.error(err);
-    res.status(500).end("Error interno<br>" + require('util').inspect(err));
 });
 

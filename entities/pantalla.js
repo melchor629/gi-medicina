@@ -1,6 +1,6 @@
 const Post = require("../models/pantalla");
 
-const PantallaSchema = {
+module.exports = {
     target: Post,
     columns: {
         pantalla: {
@@ -8,8 +8,4 @@ const PantallaSchema = {
             type: "string",
         }
     }
-};
-
-module.exports = {
-    PantallaSchema: PantallaSchema
 };

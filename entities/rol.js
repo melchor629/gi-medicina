@@ -1,6 +1,6 @@
 const Post = require("../models/rol");
 
-const RolSchema = {
+module.exports = {
     target: Post,
     columns: {
         rolName: {
@@ -15,8 +15,4 @@ const RolSchema = {
         }
     }
     
-};
-
-module.exports = {
-    RolSchema: RolSchema
 };

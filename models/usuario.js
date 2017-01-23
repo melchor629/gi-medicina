@@ -1,4 +1,4 @@
-class Usuario{
+class usuario{
 
     constructor(nombre,password,rolName){
         this.nombre=nombre;
@@ -8,4 +8,4 @@ class Usuario{
     
 }
 
-module.exports.Usuario=Usuario;
+module.exports=usuario;

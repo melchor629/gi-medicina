@@ -16,23 +16,23 @@ CREATE SCHEMA IF NOT EXISTS `medicina` DEFAULT CHARACTER SET utf8 ;
 USE `medicina` ;
 
 -- -----------------------------------------------------
--- Table `medicina`.`tLaboratorio`
+-- Table `medicina`.`laboratorio`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `medicina`.`tLaboratorio` ;
+DROP TABLE IF EXISTS `medicina`.`laboratorio` ;
 
-CREATE TABLE IF NOT EXISTS `medicina`.`tLaboratorio` (
-  `ID_LABORATORIO` INT NOT NULL,
+CREATE TABLE IF NOT EXISTS `medicina`.`laboratorio` (
+  `ID_LABORATORIO` INT NOT NULL AUTO_INCREMENT,
   `NOMBRE_LABORATORIO` VARCHAR(80) NULL,
   PRIMARY KEY (`ID_LABORATORIO`))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `medicina`.`tMedicamento`
+-- Table `medicina`.`medicamento`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `medicina`.`tMedicamento` ;
+DROP TABLE IF EXISTS `medicina`.`medicamento` ;
 
-CREATE TABLE IF NOT EXISTS `medicina`.`tMedicamento` (
+CREATE TABLE IF NOT EXISTS `medicina`.`medicamento` (
   `ID_MEDICAMENTO` INT NOT NULL,
   `NOMBRE_MEDICAMENTO` VARCHAR(80) NULL,
   `CANTIDAD_DISPONIBLE` INT NOT NULL,
@@ -41,18 +41,18 @@ CREATE TABLE IF NOT EXISTS `medicina`.`tMedicamento` (
   INDEX `fk_tMedicamento_tLaboratorio_idx` (`LABORATORIO` ASC),
   CONSTRAINT `fk_tMedicamento_tLaboratorio`
     FOREIGN KEY (`LABORATORIO`)
-    REFERENCES `medicina`.`tLaboratorio` (`ID_LABORATORIO`)
+    REFERENCES `medicina`.`laboratorio` (`ID_LABORATORIO`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `medicina`.`tRol`
+-- Table `medicina`.`rol`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `medicina`.`tRol` ;
+DROP TABLE IF EXISTS `medicina`.`rol` ;
 
-CREATE TABLE IF NOT EXISTS `medicina`.`tRol` (
+CREATE TABLE IF NOT EXISTS `medicina`.`rol` (
   `rolName` VARCHAR(50) NOT NULL,
   `rolDes` VARCHAR(255) NULL,
   `admin` TINYINT(1) NOT NULL,
@@ -61,22 +61,22 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `medicina`.`tPantalla`
+-- Table `medicina`.`pantalla`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `medicina`.`tPantalla` ;
+DROP TABLE IF EXISTS `medicina`.`pantalla` ;
 
-CREATE TABLE IF NOT EXISTS `medicina`.`tPantalla` (
+CREATE TABLE IF NOT EXISTS `medicina`.`pantalla` (
   `pantalla` VARCHAR(50) NOT NULL,
   PRIMARY KEY (`pantalla`))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `medicina`.`tPermiso`
+-- Table `medicina`.`permiso`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `medicina`.`tPermiso` ;
+DROP TABLE IF EXISTS `medicina`.`permiso` ;
 
-CREATE TABLE IF NOT EXISTS `medicina`.`tPermiso` (
+CREATE TABLE IF NOT EXISTS `medicina`.`permiso` (
   `rolName` VARCHAR(50) NOT NULL,
   `pantalla` VARCHAR(50) NOT NULL,
   `acceso` TINYINT(1) NOT NULL,
@@ -85,23 +85,23 @@ CREATE TABLE IF NOT EXISTS `medicina`.`tPermiso` (
   INDEX `fk_tPermiso_tPantalla_idx` (`pantalla` ASC),
   CONSTRAINT `fk_tPermiso_tRol`
     FOREIGN KEY (`rolName`)
-    REFERENCES `medicina`.`tRol` (`rolName`)
+    REFERENCES `medicina`.`rol` (`rolName`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_tPermiso_tPantalla`
     FOREIGN KEY (`pantalla`)
-    REFERENCES `medicina`.`tPantalla` (`pantalla`)
+    REFERENCES `medicina`.`pantalla` (`pantalla`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `medicina`.`tUsuario`
+-- Table `medicina`.`usuario`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `medicina`.`tUsuario` ;
+DROP TABLE IF EXISTS `medicina`.`usuario` ;
 
-CREATE TABLE IF NOT EXISTS `medicina`.`tUsuario` (
+CREATE TABLE IF NOT EXISTS `medicina`.`usuario` (
   `nombre` VARCHAR(50) NOT NULL,
   `password` VARCHAR(50) NOT NULL,
   `rolName` VARCHAR(50) NOT NULL,
@@ -109,7 +109,7 @@ CREATE TABLE IF NOT EXISTS `medicina`.`tUsuario` (
   INDEX `fk_tUsuario_tRol_idx` (`rolName` ASC),
   CONSTRAINT `fk_tUsuario_tRol`
     FOREIGN KEY (`rolName`)
-    REFERENCES `medicina`.`tRol` (`rolName`)
+    REFERENCES `medicina`.`rol` (`rolName`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

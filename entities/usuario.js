@@ -1,7 +1,7 @@
 const Post = require("../models/usuario");
 const Category = require("../models/rol");
 
-const UsuarioSchema = {
+module.exports = {
     target: Post,
     columns: {
         nombre: {
@@ -14,15 +14,11 @@ const UsuarioSchema = {
       },
        relations: {
         rolName: {
-            target: Category,
-            type: "one-to-many",
+            target: "rol",
+            type: "many-to-one",
             joinTable: true,
             cascadeInsert: true
         }
     }
     
-};
-
-module.exports = {
-    UsuarioSchema: UsuarioSchema
 };

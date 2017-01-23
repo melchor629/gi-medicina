@@ -1,7 +1,7 @@
 const Post = require("../models/medicamento");
 const Category = require("../models/laboratorio");
 
-const MedicamentoSchema = {
+module.exports = {
     target: Post,
     columns: {
         ID_MEDICAMENTO: {
@@ -18,14 +18,10 @@ const MedicamentoSchema = {
 
     relations: {
         LABORATORIO: {
-            target: Category,
-            type: "one-to-many",
+            target: "laboratorio",
+            type: "many-to-one",
             joinTable: true,
             cascadeInsert: true
         }
     }
-};
-
-module.exports = {
-    MedicamentoSchema: MedicamentoSchema
 };

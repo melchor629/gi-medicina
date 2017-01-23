@@ -1,4 +1,4 @@
-class Permiso{
+class permiso{
 
     constructor(rolName, pantalla,acceso,modificacion){
         this.rolName=rolName;
@@ -9,4 +9,4 @@ class Permiso{
     
 }
 
-module.exports.Permiso=Permiso;
+module.exports=permiso;

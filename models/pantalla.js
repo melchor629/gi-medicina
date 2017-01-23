@@ -1,4 +1,4 @@
-class Pantalla{
+class pantalla{
 
     constructor(pantalla){
         this.pantalla=pantalla;   
@@ -6,4 +6,4 @@ class Pantalla{
     
 }
 
-module.exports.Pantalla=Pantalla;
+module.exports=pantalla;

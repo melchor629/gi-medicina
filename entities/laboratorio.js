@@ -1,19 +1,16 @@
 const Post = require("../models/laboratorio");
 
-const LaboratorioSchema = {
+module.exports = {
     target: Post,
     columns: {
         ID_LABORATORIO: {
             primary: true,
             type: "int",
+            generated: true
         },
         NOMBRE_LABORATORIO: {
             type: "string"
         },
     }
     
-};
-
-module.exports = {
-    LaboratorioSchema: LaboratorioSchema
 };

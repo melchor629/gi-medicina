@@ -1,4 +1,4 @@
-class Laboratorio{
+class laboratorio{
 
     constructor(id, nombre){
         this.id=id;
@@ -7,4 +7,4 @@ class Laboratorio{
     
 }
 
-module.exports.Laboratorio=Laboratorio;
+module.exports=laboratorio;

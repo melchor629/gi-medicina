@@ -1,4 +1,4 @@
-class Rol{
+class rol{
 
     constructor(rolName, rolDes,admin){
         this.rolName=rolName;
@@ -8,4 +8,4 @@ class Rol{
     
 }
 
-module.exports.Rol=Rol;
+module.exports=rol;
