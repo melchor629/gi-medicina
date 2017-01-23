@@ -29,7 +29,9 @@ typeorm.createConnection({
         __dirname + '/entities/*.js'
     ],
     autoSchemaSync: true
-}).then(connection => require('./api.js')(app, connection))
+}).then(connection =>{ 
+require('./api.js')(app, connection)
+app.listen(8080, () => console.log('Servidor escuchando en http://localhost:8080'))})
 .catch(error => {
     console.error(error);
     process.exit(1);
@@ -46,4 +48,3 @@ app.use((err, req, res, next) => {
     res.status(500).end("Error interno<br>" + require('util').inspect(err));
 });
 
-app.listen(8080, () => console.log('Servidor escuchando en http://localhost:8080'));
