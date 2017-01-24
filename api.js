@@ -61,7 +61,7 @@ module.exports = (app, connection) => {
                 "LABORATORIO":req.body.laboratorio
             };
             mediRepo.persist(medicamentoNuevo).then(() => {
-                res.json({ok:true});
+                res.json({ok:true,id:Number(r[0]['MAX(ID_MEDICAMENTO)'])+ 1});
             }).catch(e => {
                 res.status(500).end(require('util').inspect(e));
             });
