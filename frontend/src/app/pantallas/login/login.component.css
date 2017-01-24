@@ -1,0 +1,19 @@
+.cuadro-login{
+  background-color: #E0E0E0;
+  margin: 2% 15% 2% 15%;
+  padding: 2%;
+  color: #212121;
+  text-align: center;
+}
+
+.grande{
+  font-size: 2em;
+}
+
+md-input-container{
+  text-align: left;
+}
+
+form{
+  margin: 4%;
+}

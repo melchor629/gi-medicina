@@ -1,0 +1,27 @@
+<h2 [innerHTML]="modo ? 'Creación de medicamento':'Edición de medicamento'"></h2>
+
+<form #formulario="ngForm" (ngSubmit)="submit(formulario.value)" style="text-align: center;">
+
+  Nombre: <md-input-container class="margenInferior">
+    <input type="text" md-input placeholder="Nombre de medicamento" required [(ngModel)]="medicamento.nombreMedicamento" name="nombre">
+  </md-input-container>
+  <br>
+  Cantidad: <md-input-container class="margenInferior">
+    <input type="number" md-input placeholder="Cantidad" required [(ngModel)] = "medicamento.cantidadDisponible" name="cantidad">
+  </md-input-container>
+  <br>
+  Laboratorio: <md-select required="true" class="margenInferior" placeholder="Laboratorio" [(ngModel)]="medicamento.laboratorio" name="laboratorio">
+  <md-option *ngFor="let laboratorio of listaLaboratorios" [value]="laboratorio.id">
+    {{laboratorio.nombre}}
+  </md-option>
+</md-select>
+  <br>
+  <button type="submit" *ngIf="modo" md-raised-button style="margin-top: 2%;" [disabled]="!formulario.valid || formulario.value.laboratorio == ''">Añadir medicamento</button>
+  <button type="submit" *ngIf="!modo" md-raised-button style="margin-top: 2%;" [disabled]="!formulario.valid || formulario.value.laboratorio == ''">Modificar medicamento</button>
+</form>
+<!-- Un conjunto de FormControl (elementos basicos del formulario) es un FormGroup
+Cuando se usa en los campos el ngModel sin ponerle atributo y sin [()] (banna in thebox) significa que se quiere crear
+un FormControl de cara a que se envie el formulario
+ Para ello es importante que el campo tenga un nombre, que es de donde coge angular el nombre dle atributo para el objeto
+ que posteriormente genera
+-->
