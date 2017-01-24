@@ -10,6 +10,9 @@ module.exports = {
         },
         password: {
             type: "string"
+        },
+        rolName: {
+            type: "string"
         }
       },
        relations: {

@@ -23,8 +23,7 @@ module.exports = {
         LABORATORIO: {
             target: "laboratorio",
             type: "many-to-one",
-            joinTable: true,
-            cascadeInsert: true
+            joinTable: true
         }
     }
 };
