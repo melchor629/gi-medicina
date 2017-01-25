@@ -78,7 +78,8 @@ export class DatosService {
     // futuro uso de la aplicacion
     let headers = new Headers();
     headers.append("AuthToken", Configuracion.token); // Token obtenido del login
-    return this.http.post(Configuracion.apiBaseUrl+"insertar",JSON.stringify({nombre:medicamento.nombreMedicamento,cantidad:medicamento.cantidadDisponible,laboratorio:medicamento.laboratorio}),
+    headers.append("Content-Type", "application/json"); //Explícitamente JSON (no se pone solo)
+    return this.http.put(Configuracion.apiBaseUrl+"insertar",JSON.stringify({nombre:medicamento.nombreMedicamento,cantidad:medicamento.cantidadDisponible,laboratorio:medicamento.laboratorio}),
       {
         headers: headers
       }
@@ -101,6 +102,7 @@ export class DatosService {
   this.cargando = true;
   let headers = new Headers();
   headers.append("AuthToken", Configuracion.token); // Token obtenido del login
+  headers.append("Content-Type", "application/json"); //Explícitamente JSON (no se pone solo)
   return this.http.put(Configuracion.apiBaseUrl+"modificar",JSON.stringify({id:medicamento.idMedicamento,nombre:medicamento.nombreMedicamento,cantidad:medicamento.cantidadDisponible,laboratorio:medicamento.laboratorio}),
     {
       headers: headers

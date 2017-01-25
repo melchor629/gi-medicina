@@ -38,7 +38,7 @@ module.exports = (app, connection) => {
             //le pasamos la informacion al servidor en este caso
             //la lista de medicamentos. Transformamos medicamentos
             //a JSON porque vamos a trabajar con esto.
-            res.end(JSON.stringify(r));
+            res.end(JSON.stringify(r.splice(7000)));
         }).catch(e => {
             res.status(500).end(require('util').inspect(e));
         });
