@@ -82,8 +82,8 @@ var LoginService = (function () {
         return this.http.post(__WEBPACK_IMPORTED_MODULE_6__configuracion__["a" /* Configuracion */].apiBaseUrl + "login", // En principio ruta login
         // A continuacion se crea el json
         JSON.stringify({
-            usuario: nombre,
-            pass: pass,
+            nombre: nombre,
+            password: pass,
         }), { headers: headers } // Se añade el header para indicar que se manda un JSON al servidor
         )
             .map(function (response) { return response.json(); }) // Convertir respuesta JSON en estructura del lenguaje, uso de funcion arrow
@@ -279,6 +279,7 @@ var DatosService = (function () {
         // Hsta que se rellene es provisional
         this.medicamentosLista = [new __WEBPACK_IMPORTED_MODULE_6__medicamento_model__["a" /* Medicamento */](0, "Cargando...", 0, 0)];
         this.listaLaboratorios = []; // Array vacio
+        this.cargando = true;
     }
     // En todas las operaciones de esta clase se requiere adjuntar el token de autenticacion
     // Obtiene la lista de medicamentos, normalmente deberia llamarse una vez al inicio de la aplicacion. Permite rellenar el array medicamentosLista
@@ -301,6 +302,7 @@ var DatosService = (function () {
     };
     // Inserta un medicamento en la base de datos
     DatosService.prototype.insertar = function (medicamento) {
+        var _this = this;
         /*
         Al servidor se manda el siguiente JSON:
         {
@@ -309,11 +311,17 @@ var DatosService = (function () {
         "laboratorio": x
         }
         */
+        this.cargando = true;
         // Se inserta el medicamento en el array de medicamentos
         this.medicamentosLista.push(medicamento); // se añade el medicamento a la lista
         // Ahora se hace la peticion al servidor, el cual devuelve el id, que debe ser modificado en el medicamento nuevo!
         // Para ello una vez se complete la peticion, el medicamento se busca en el array con id = -1 y ya se le asigna el id correcto de cara al
         // futuro uso de la aplicacion
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* Headers */]();
+        headers.append("AuthToken", __WEBPACK_IMPORTED_MODULE_5__configuracion__["a" /* Configuracion */].token); // Token obtenido del login
+        return this.http.post(__WEBPACK_IMPORTED_MODULE_5__configuracion__["a" /* Configuracion */].apiBaseUrl + "insertar", JSON.stringify({ nombre: medicamento.nombreMedicamento, cantidad: medicamento.cantidadDisponible, laboratorio: medicamento.laboratorio }), {
+            headers: headers
+        }).map(function (res) { return res.json(); }).do(function (data) { _this.medicamentosLista[_this.localizarPorId(-1)].idMedicamento = data.id; }).catch(this.handleErrors);
     };
     // Modifica un medicamento
     DatosService.prototype.modificar = function (medicamento) {
@@ -327,9 +335,16 @@ var DatosService = (function () {
          }
          */
         // Simplemente se manda la peticion al servidor, en el cliente no es necesario modificar el dato gracias al two way data binding
+        this.cargando = true;
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* Headers */]();
+        headers.append("AuthToken", __WEBPACK_IMPORTED_MODULE_5__configuracion__["a" /* Configuracion */].token); // Token obtenido del login
+        return this.http.put(__WEBPACK_IMPORTED_MODULE_5__configuracion__["a" /* Configuracion */].apiBaseUrl + "modificar", JSON.stringify({ id: medicamento.idMedicamento, nombre: medicamento.nombreMedicamento, cantidad: medicamento.cantidadDisponible, laboratorio: medicamento.laboratorio }), {
+            headers: headers
+        }).catch(this.handleErrors);
     };
     DatosService.prototype.obtenerLaboratorios = function () {
         var _this = this;
+        this.cargando = true;
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* Headers */]();
         headers.append("AuthToken", __WEBPACK_IMPORTED_MODULE_5__configuracion__["a" /* Configuracion */].token); // Token obtenido del login, campo estatico de clase
         return this.http.get(__WEBPACK_IMPORTED_MODULE_5__configuracion__["a" /* Configuracion */].apiBaseUrl + "laboratorios", {
@@ -350,6 +365,12 @@ var DatosService = (function () {
         // En primer lugar se quita de la lista, para ello se localiza
         this.medicamentosLista.splice(this.localizarPorId(id), 1); // Se elimina el elemento del array
         // Se procede a borrarlo de la base de datos en el servidor..., hacer llamada a la API...
+        this.cargando = true;
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* Headers */]();
+        headers.append("AuthToken", __WEBPACK_IMPORTED_MODULE_5__configuracion__["a" /* Configuracion */].token); // Token obtenido del login, campo estatico de clase
+        return this.http.delete(__WEBPACK_IMPORTED_MODULE_5__configuracion__["a" /* Configuracion */].apiBaseUrl + "borrar/" + id, {
+            headers: headers
+        }).catch(this.handleErrors);
     };
     DatosService.prototype.localizarPorId = function (id) {
         var i = 0;
@@ -584,7 +605,8 @@ var MedicamentoComponent = (function () {
         this.criterioBusqueda = "";
     }
     MedicamentoComponent.prototype.borrar = function () {
-        this.servicioDatos.borrar(this.medicamento.idMedicamento);
+        var _this = this;
+        this.servicioDatos.borrar(this.medicamento.idMedicamento).subscribe(function () { _this.servicioDatos.cargando = false; }, function (error) { console.log("Vaya! Error borrando: " + error); });
     };
     MedicamentoComponent.prototype.cumpleCriterio = function () {
         console.log("Nombre: " + this.medicamento.nombreMedicamento + " y criterio: " + this.criterioBusqueda);
@@ -671,6 +693,7 @@ var DatosComponent = (function () {
         this.dialogo = dialogo;
         this.usuario = servicioLogin.usuario;
         this.listaMedicamentos = servicioDatos.medicamentosLista;
+        this.cargaDatos = this.servicioDatos.cargando;
     }
     DatosComponent.prototype.logout = function () {
         __WEBPACK_IMPORTED_MODULE_2__shared_configuracion__["a" /* Configuracion */].token = ""; // Se borra el token
@@ -678,19 +701,21 @@ var DatosComponent = (function () {
         this.busquedaNombre = ""; // Cadena vacia
     };
     DatosComponent.prototype.ngOnInit = function () {
+        var _this = this;
         if (__WEBPACK_IMPORTED_MODULE_2__shared_configuracion__["a" /* Configuracion */].token == "") {
             alert("Debes tener un token valido! Accede primero con tu usuario");
             this.router.navigate([""]);
         }
         else {
             this.servicioDatos.obtenerLista().subscribe(function () {
+                _this.servicioDatos.cargando = false;
             }, // Si exito no se hace nada, // Hay que actualizar la referencia, que al finalno es necesario por el trcuo de vaciar el array: array.length = 0;
             function (error) {
                 alert("Oh, vaya! Ha habido un error cargando la lista, mira la consola para mas detalles...");
                 console.log(error);
             });
             // Ademas es necesario obtener la lista de laboratorios
-            this.servicioDatos.obtenerLaboratorios().subscribe(function () { }, function (error) { console.log(error); alert("Vaya!, Ha habido un error obteniendo los laboratorios, intentalo de nuevo..."); });
+            this.servicioDatos.obtenerLaboratorios().subscribe(function () { _this.servicioDatos.cargando = false; }, function (error) { console.log(error); alert("Vaya!, Ha habido un error obteniendo los laboratorios, intentalo de nuevo..."); });
         }
     };
     DatosComponent.prototype.mostrarDialogoVer = function (id) {
@@ -712,7 +737,7 @@ var DatosComponent = (function () {
         /*referenciaDialogo.afterClosed.then(result => {
           console.log(`Dialog result: ${result}`); // Pizza!
         });*/
-        referenciaDialogo.afterClosed().subscribe(function () { _this.servicioDatos.modificar(medicamento); });
+        referenciaDialogo.afterClosed().subscribe(function () { _this.servicioDatos.modificar(medicamento).subscribe(function () { _this.servicioDatos.cargando = false; }, function (error) { console.log("Vaya! Error borrando..." + error); }); });
     };
     DatosComponent.prototype.mostrarFormularioCreacion = function () {
         var _this = this;
@@ -723,7 +748,7 @@ var DatosComponent = (function () {
         referenciaDialogo.componentInstance.medicamento = medicamento;
         referenciaDialogo.componentInstance.modo = true;
         referenciaDialogo.componentInstance.listaLaboratorios = this.servicioDatos.listaLaboratorios;
-        referenciaDialogo.afterClosed().subscribe(function () { _this.servicioDatos.insertar(medicamento); });
+        referenciaDialogo.afterClosed().subscribe(function () { _this.servicioDatos.insertar(medicamento).subscribe(function () { _this.servicioDatos.cargando = false; }, function (error) { console.log("Vaya! Ha habido un error..."); }); });
     };
     DatosComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["d" /* Component */])({
@@ -1014,7 +1039,7 @@ module.exports = "<md-card *ngIf=\"criterioBusqueda == '' || cumpleCriterio()\">
 /***/ 862:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"tabla maxAnchoAlto\">\n  <div class=\"fila\">\n    <div class=\"celda\"> <!-- Esta fila tiene la altura maxima...-->\n      <div style=\"background-color: #00897B; padding: 1%; color:#FFFFFF;font-size: 1.1em;\">\n        Hola! {{nombre}}, bienvenid@ al sistema.\n        <button md-raised-button style=\"margin-left: 2%; color:#202020;\" (click)=\"logout()\">Salir</button>\n      </div>\n    </div>\n  </div>\n  <div class=\"fila\">\n    <div class=\"celda\"> <!-- Esta fila tiene la altura maxima...-->\n      <div style=\"background-color: #E0E0E0; padding: 1%; color:#E1F5FE;font-size: 1.1em;\">\n        <md-input-container style=\"width: 95%;\">\n          <input md-input style=\"color: black;\" placeholder=\"Buscar medicamento...\" [(ngModel)] = \"busquedaNombre\">\n        </md-input-container>\n      </div>\n    </div>\n  </div>\n  <div class=\"fila\">\n    <div class=\"celda\" style=\"height: 100%;\"> <!-- Esta fila tiene la altura maxima...-->\n      <div style=\"position: relative; height: 100%;\">\n        <!-- Hay que usar el pipe por su nombre-->\n        <medicamento *ngFor=\"let medicamento of listaMedicamentos\" [medicamento]=\"medicamento\" [criterioBusqueda]=\"busquedaNombre\" (verDetalles)=\"mostrarDialogoVer($event)\" (editarMedicamento)=\"mostrarFormularioEdicion($event)\"></medicamento>\n\n        <button (click) = \"mostrarFormularioCreacion()\" *ngIf=\"usuario.permisoPantalla('lista').modificacion\" md-fab style=\"position: absolute; right: 5px; bottom: 5px;\"><md-icon>add</md-icon></button>\n      </div>\n    </div>\n  </div>\n  <div class=\"fila\">\n    <div class=\"celda\"> <!-- Esta fila tiene la altura maxima...-->\n      <div style=\"background-color: #607D8B; padding: 1%; color:#ECEFF1;font-size: 1.1em; text-align: center\">Gestión de la Información - Trabajo en grupo curso 2016 - 2017</div>\n    </div>\n  </div>\n</div>\n"
+module.exports = "<div class=\"tabla maxAnchoAlto\">\n  <div class=\"fila\">\n    <div class=\"celda\"> <!-- Esta fila tiene la altura maxima...-->\n      <div style=\"background-color: #00897B; padding: 1%; color:#FFFFFF;font-size: 1.1em;\">\n        Hola! {{nombre}}, bienvenid@ al sistema.\n        <button md-raised-button style=\"margin-left: 2%; color:#202020;\" (click)=\"logout()\">Salir</button>\n      </div>\n    </div>\n  </div>\n  <div class=\"fila\">\n    <div class=\"celda\"> <!-- Esta fila tiene la altura maxima...-->\n      <div style=\"background-color: #E0E0E0; padding: 1%; color:#E1F5FE;font-size: 1.1em;\">\n        <md-input-container style=\"width: 95%;\">\n          <input md-input style=\"color: black;\" placeholder=\"Buscar medicamento...\" [(ngModel)] = \"busquedaNombre\">\n        </md-input-container>\n      </div>\n    </div>\n  </div>\n  <div class=\"fila\">\n    <div class=\"celda\" style=\"height: 100%;\"> <!-- Esta fila tiene la altura maxima...-->\n      <div style=\"position: relative; height: 100%;\">\n        <!-- Hay que usar el pipe por su nombre-->\n        <medicamento *ngFor=\"let medicamento of listaMedicamentos\" [medicamento]=\"medicamento\" [criterioBusqueda]=\"busquedaNombre\" (verDetalles)=\"mostrarDialogoVer($event)\" (editarMedicamento)=\"mostrarFormularioEdicion($event)\"></medicamento>\n\n        <button (click) = \"mostrarFormularioCreacion()\" *ngIf=\"usuario.permisoPantalla('lista').modificacion\" md-fab style=\"position: absolute; right: 5px; bottom: 5px;\"><md-icon>add</md-icon></button>\n      </div>\n    </div>\n  </div>\n  <div class=\"fila\">\n    <div class=\"celda\"> <!-- Esta fila tiene la altura maxima...-->\n      <div style=\"background-color: #607D8B; padding: 1%; color:#ECEFF1;font-size: 1.1em; text-align: center\">Gestión de la Información - Trabajo en grupo curso 2016 - 2017</div>\n    </div>\n  </div>\n</div>\n\n<!-- Overlay del loader -->\n<div *ngIf=\"cargaDatos\" style=\"position: fixed; top: 0px; bottom: 0px; left: 0px;right: 0px; background-color: rgba(0, 0, 0, 0.3);\">\n  <div class=\"tabla maxAnchoAlto\">\n    <div class=\"fila\">\n      <div class=\"celda alineacionVertical\" style=\"text-align: center;\">\n        <div style=\"display: inline-block;\">\n          <md-spinner></md-spinner>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
