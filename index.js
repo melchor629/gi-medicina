@@ -48,7 +48,7 @@ typeorm.createConnection({
         res.status(500).end("Error interno<br>" + require('util').inspect(err));
     });
 
-    app.listen(8080, () => console.log('Servidor escuchando en http://localhost:8080'));
+    app.listen(Number(process.env.PORT) || 8080, () => console.log('Servidor escuchando en http://localhost:' + (Number(process.env.PORT) || 8080)));
 })
 .catch(error => {
     console.error(error);
