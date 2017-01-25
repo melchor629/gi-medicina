@@ -1,4 +1,4 @@
-<md-card *ngIf="criterioBusqueda == '' || cumpleCriterio()">
+<md-card *ngIf="!!!criterioBusqueda || cumpleCriterio()">
   <div class="tabla">
   <div class="fila">
     <div class="celda" (click)="onClickDetalles()" style="width: 100%;">{{medicamento.nombreMedicamento}}</div>

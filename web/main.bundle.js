@@ -26,7 +26,7 @@ var Medicamento = (function () {
     }
     return Medicamento;
 }());
-//# sourceMappingURL=/home/desarrollo/RepositorioFinalGI/gi-medicina/frontend/src/medicamento.model.js.map
+//# sourceMappingURL=/home/mataillo/Escritorio/gi-medicina/frontend/src/medicamento.model.js.map
 
 /***/ }),
 
@@ -108,7 +108,7 @@ var LoginService = (function () {
     return LoginService;
     var _a;
 }());
-//# sourceMappingURL=/home/desarrollo/RepositorioFinalGI/gi-medicina/frontend/src/login.service.js.map
+//# sourceMappingURL=/home/mataillo/Escritorio/gi-medicina/frontend/src/login.service.js.map
 
 /***/ }),
 
@@ -168,7 +168,7 @@ var DialogoFormularioComponent = (function () {
     return DialogoFormularioComponent;
     var _a, _b;
 }());
-//# sourceMappingURL=/home/desarrollo/RepositorioFinalGI/gi-medicina/frontend/src/dialogo-formulario.component.js.map
+//# sourceMappingURL=/home/mataillo/Escritorio/gi-medicina/frontend/src/dialogo-formulario.component.js.map
 
 /***/ }),
 
@@ -212,7 +212,7 @@ var DialogoComponent = (function () {
     return DialogoComponent;
     var _a;
 }());
-//# sourceMappingURL=/home/desarrollo/RepositorioFinalGI/gi-medicina/frontend/src/dialogo.component.js.map
+//# sourceMappingURL=/home/mataillo/Escritorio/gi-medicina/frontend/src/dialogo.component.js.map
 
 /***/ }),
 
@@ -228,11 +228,11 @@ var DialogoComponent = (function () {
 var Configuracion = (function () {
     function Configuracion() {
     }
-    Configuracion.apiBaseUrl = "http://localhost:3000/";
+    Configuracion.apiBaseUrl = "http://localhost:8080/";
     Configuracion.token = ""; // Donde se almacenara el token que se obtenga del servidor, es un campo estatico de una clase!
     return Configuracion;
 }());
-//# sourceMappingURL=/home/desarrollo/RepositorioFinalGI/gi-medicina/frontend/src/configuracion.js.map
+//# sourceMappingURL=/home/mataillo/Escritorio/gi-medicina/frontend/src/configuracion.js.map
 
 /***/ }),
 
@@ -319,7 +319,8 @@ var DatosService = (function () {
         // futuro uso de la aplicacion
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* Headers */]();
         headers.append("AuthToken", __WEBPACK_IMPORTED_MODULE_5__configuracion__["a" /* Configuracion */].token); // Token obtenido del login
-        return this.http.post(__WEBPACK_IMPORTED_MODULE_5__configuracion__["a" /* Configuracion */].apiBaseUrl + "insertar", JSON.stringify({ nombre: medicamento.nombreMedicamento, cantidad: medicamento.cantidadDisponible, laboratorio: medicamento.laboratorio }), {
+        headers.append("Content-Type", "application/json"); //Explícitamente JSON (no se pone solo)
+        return this.http.put(__WEBPACK_IMPORTED_MODULE_5__configuracion__["a" /* Configuracion */].apiBaseUrl + "insertar", JSON.stringify({ nombre: medicamento.nombreMedicamento, cantidad: medicamento.cantidadDisponible, laboratorio: medicamento.laboratorio }), {
             headers: headers
         }).map(function (res) { return res.json(); }).do(function (data) { _this.medicamentosLista[_this.localizarPorId(-1)].idMedicamento = data.id; }).catch(this.handleErrors);
     };
@@ -338,6 +339,7 @@ var DatosService = (function () {
         this.cargando = true;
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* Headers */]();
         headers.append("AuthToken", __WEBPACK_IMPORTED_MODULE_5__configuracion__["a" /* Configuracion */].token); // Token obtenido del login
+        headers.append("Content-Type", "application/json"); //Explícitamente JSON (no se pone solo)
         return this.http.put(__WEBPACK_IMPORTED_MODULE_5__configuracion__["a" /* Configuracion */].apiBaseUrl + "modificar", JSON.stringify({ id: medicamento.idMedicamento, nombre: medicamento.nombreMedicamento, cantidad: medicamento.cantidadDisponible, laboratorio: medicamento.laboratorio }), {
             headers: headers
         }).catch(this.handleErrors);
@@ -399,7 +401,7 @@ var DatosService = (function () {
     return DatosService;
     var _a;
 }());
-//# sourceMappingURL=/home/desarrollo/RepositorioFinalGI/gi-medicina/frontend/src/datos.service.js.map
+//# sourceMappingURL=/home/mataillo/Escritorio/gi-medicina/frontend/src/datos.service.js.map
 
 /***/ }),
 
@@ -436,7 +438,7 @@ if (__WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment *
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__angular_core__["a" /* enableProdMode */])();
 }
 __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_4__app_app_module__["a" /* AppModule */]);
-//# sourceMappingURL=/home/desarrollo/RepositorioFinalGI/gi-medicina/frontend/src/main.js.map
+//# sourceMappingURL=/home/mataillo/Escritorio/gi-medicina/frontend/src/main.js.map
 
 /***/ }),
 
@@ -472,7 +474,7 @@ var AppComponent = (function () {
     ], AppComponent);
     return AppComponent;
 }());
-//# sourceMappingURL=/home/desarrollo/RepositorioFinalGI/gi-medicina/frontend/src/app.component.js.map
+//# sourceMappingURL=/home/mataillo/Escritorio/gi-medicina/frontend/src/app.component.js.map
 
 /***/ }),
 
@@ -533,7 +535,7 @@ var AppModule = (function () {
     ], AppModule);
     return AppModule;
 }());
-//# sourceMappingURL=/home/desarrollo/RepositorioFinalGI/gi-medicina/frontend/src/app.module.js.map
+//# sourceMappingURL=/home/mataillo/Escritorio/gi-medicina/frontend/src/app.module.js.map
 
 /***/ }),
 
@@ -563,7 +565,7 @@ var appRoutes = [
 var navigatableComponents = [
     __WEBPACK_IMPORTED_MODULE_2__pantallas_login_login_component__["a" /* LoginComponent */], __WEBPACK_IMPORTED_MODULE_1__pantallas_datos_datos_component__["a" /* DatosComponent */], __WEBPACK_IMPORTED_MODULE_3__medicamento_medicamento_component__["a" /* MedicamentoComponent */], __WEBPACK_IMPORTED_MODULE_4__dialogo_dialogo_component__["a" /* DialogoComponent */], __WEBPACK_IMPORTED_MODULE_5__dialogo_formulario_dialogo_formulario_component__["a" /* DialogoFormularioComponent */], __WEBPACK_IMPORTED_MODULE_5__dialogo_formulario_dialogo_formulario_component__["a" /* DialogoFormularioComponent */] // Necesario para la declaracion en el modulo, aunque no sea navegable
 ];
-//# sourceMappingURL=/home/desarrollo/RepositorioFinalGI/gi-medicina/frontend/src/app.routing.js.map
+//# sourceMappingURL=/home/mataillo/Escritorio/gi-medicina/frontend/src/app.routing.js.map
 
 /***/ }),
 
@@ -609,7 +611,7 @@ var MedicamentoComponent = (function () {
         this.servicioDatos.borrar(this.medicamento.idMedicamento).subscribe(function () { _this.servicioDatos.cargando = false; }, function (error) { console.log("Vaya! Error borrando: " + error); });
     };
     MedicamentoComponent.prototype.cumpleCriterio = function () {
-        console.log("Nombre: " + this.medicamento.nombreMedicamento + " y criterio: " + this.criterioBusqueda);
+        //console.log("Nombre: "+this.medicamento.nombreMedicamento+" y criterio: "+this.criterioBusqueda);
         var retorno = true;
         if (typeof this.criterioBusqueda !== 'undefined') {
             retorno = this.medicamento.nombreMedicamento.toLowerCase().indexOf(this.criterioBusqueda.toLowerCase()) !== -1;
@@ -649,7 +651,7 @@ var MedicamentoComponent = (function () {
     return MedicamentoComponent;
     var _a, _b, _c, _d, _e;
 }());
-//# sourceMappingURL=/home/desarrollo/RepositorioFinalGI/gi-medicina/frontend/src/medicamento.component.js.map
+//# sourceMappingURL=/home/mataillo/Escritorio/gi-medicina/frontend/src/medicamento.component.js.map
 
 /***/ }),
 
@@ -762,7 +764,7 @@ var DatosComponent = (function () {
     return DatosComponent;
     var _a, _b, _c, _d;
 }());
-//# sourceMappingURL=/home/desarrollo/RepositorioFinalGI/gi-medicina/frontend/src/datos.component.js.map
+//# sourceMappingURL=/home/mataillo/Escritorio/gi-medicina/frontend/src/datos.component.js.map
 
 /***/ }),
 
@@ -807,7 +809,7 @@ var LoginComponent = (function () {
     return LoginComponent;
     var _a, _b;
 }());
-//# sourceMappingURL=/home/desarrollo/RepositorioFinalGI/gi-medicina/frontend/src/login.component.js.map
+//# sourceMappingURL=/home/mataillo/Escritorio/gi-medicina/frontend/src/login.component.js.map
 
 /***/ }),
 
@@ -827,7 +829,7 @@ var Laboratorio = (function () {
     ;
     return Laboratorio;
 }());
-//# sourceMappingURL=/home/desarrollo/RepositorioFinalGI/gi-medicina/frontend/src/laboratorio.model.js.map
+//# sourceMappingURL=/home/mataillo/Escritorio/gi-medicina/frontend/src/laboratorio.model.js.map
 
 /***/ }),
 
@@ -854,7 +856,7 @@ var Permiso = (function () {
     }
     return Permiso;
 }());
-//# sourceMappingURL=/home/desarrollo/RepositorioFinalGI/gi-medicina/frontend/src/permiso.model.js.map
+//# sourceMappingURL=/home/mataillo/Escritorio/gi-medicina/frontend/src/permiso.model.js.map
 
 /***/ }),
 
@@ -890,7 +892,7 @@ var Usuario = (function () {
     };
     return Usuario;
 }());
-//# sourceMappingURL=/home/desarrollo/RepositorioFinalGI/gi-medicina/frontend/src/usuario.model.js.map
+//# sourceMappingURL=/home/mataillo/Escritorio/gi-medicina/frontend/src/usuario.model.js.map
 
 /***/ }),
 
@@ -906,7 +908,7 @@ var Usuario = (function () {
 var environment = {
     production: false
 };
-//# sourceMappingURL=/home/desarrollo/RepositorioFinalGI/gi-medicina/frontend/src/environment.js.map
+//# sourceMappingURL=/home/mataillo/Escritorio/gi-medicina/frontend/src/environment.js.map
 
 /***/ }),
 
@@ -962,7 +964,7 @@ var environment = {
 
 
 
-//# sourceMappingURL=/home/desarrollo/RepositorioFinalGI/gi-medicina/frontend/src/polyfills.js.map
+//# sourceMappingURL=/home/mataillo/Escritorio/gi-medicina/frontend/src/polyfills.js.map
 
 /***/ }),
 
@@ -1032,7 +1034,7 @@ module.exports = "<div class=\"tabla\">\n  <div class=\"fila\"><div class=\"celd
 /***/ 861:
 /***/ (function(module, exports) {
 
-module.exports = "<md-card *ngIf=\"criterioBusqueda == '' || cumpleCriterio()\">\n  <div class=\"tabla\">\n  <div class=\"fila\">\n    <div class=\"celda\" (click)=\"onClickDetalles()\" style=\"width: 100%;\">{{medicamento.nombreMedicamento}}</div>\n    <div class=\"celda\"><button *ngIf=\"servicioLogin.usuario.permisoPantalla('detalle').modificacion\" md-icon-button style=\"vertical-align: middle;\" (click) = \"editar()\"><md-icon>edit</md-icon></button></div>\n    <div class=\"celda\"><button *ngIf=\"servicioLogin.usuario.permisoPantalla('lista').modificacion\" md-icon-button style=\"vertical-align: middle;\" (click) = \"borrar()\"><md-icon>delete</md-icon></button></div>\n  </div>\n  </div>\n</md-card>\n<div></div>\n"
+module.exports = "<md-card *ngIf=\"!!!criterioBusqueda || cumpleCriterio()\">\n  <div class=\"tabla\">\n  <div class=\"fila\">\n    <div class=\"celda\" (click)=\"onClickDetalles()\" style=\"width: 100%;\">{{medicamento.nombreMedicamento}}</div>\n    <div class=\"celda\"><button *ngIf=\"servicioLogin.usuario.permisoPantalla('detalle').modificacion\" md-icon-button style=\"vertical-align: middle;\" (click) = \"editar()\"><md-icon>edit</md-icon></button></div>\n    <div class=\"celda\"><button *ngIf=\"servicioLogin.usuario.permisoPantalla('lista').modificacion\" md-icon-button style=\"vertical-align: middle;\" (click) = \"borrar()\"><md-icon>delete</md-icon></button></div>\n  </div>\n  </div>\n</md-card>\n<div></div>\n"
 
 /***/ }),
 

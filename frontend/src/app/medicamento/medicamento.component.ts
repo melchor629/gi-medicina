@@ -39,7 +39,7 @@ export class MedicamentoComponent{
   }
 
   cumpleCriterio():boolean{
-    console.log("Nombre: "+this.medicamento.nombreMedicamento+" y criterio: "+this.criterioBusqueda);
+    //console.log("Nombre: "+this.medicamento.nombreMedicamento+" y criterio: "+this.criterioBusqueda);
 
     let retorno = true;
 
