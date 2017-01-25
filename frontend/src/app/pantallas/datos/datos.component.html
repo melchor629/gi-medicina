@@ -32,3 +32,16 @@
     </div>
   </div>
 </div>
+
+<!-- Overlay del loader -->
+<div *ngIf="cargaDatos" style="position: fixed; top: 0px; bottom: 0px; left: 0px;right: 0px; background-color: rgba(0, 0, 0, 0.3);">
+  <div class="tabla maxAnchoAlto">
+    <div class="fila">
+      <div class="celda alineacionVertical" style="text-align: center;">
+        <div style="display: inline-block;">
+          <md-spinner></md-spinner>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -23,12 +23,14 @@ export class DatosService {
 
   medicamentosLista: Array<Medicamento>;
   listaLaboratorios: Array<Laboratorio>;
+  cargando: boolean;
 
   constructor(private http: Http) { // Inyeccion de dependencias de angular, ahora se tiene acceso a http
 
     // Hsta que se rellene es provisional
     this.medicamentosLista = [new Medicamento(0,"Cargando...",0,0)];
     this.listaLaboratorios = []; // Array vacio
+    this.cargando = true;
   }
 
   // En todas las operaciones de esta clase se requiere adjuntar el token de autenticacion
@@ -67,12 +69,20 @@ export class DatosService {
     "laboratorio": x
     }
     */
+    this.cargando = true;
   // Se inserta el medicamento en el array de medicamentos
     this.medicamentosLista.push(medicamento); // se añade el medicamento a la lista
 
     // Ahora se hace la peticion al servidor, el cual devuelve el id, que debe ser modificado en el medicamento nuevo!
     // Para ello una vez se complete la peticion, el medicamento se busca en el array con id = -1 y ya se le asigna el id correcto de cara al
     // futuro uso de la aplicacion
+    let headers = new Headers();
+    headers.append("AuthToken", Configuracion.token); // Token obtenido del login
+    return this.http.post(Configuracion.apiBaseUrl+"insertar",JSON.stringify({nombre:medicamento.nombreMedicamento,cantidad:medicamento.cantidadDisponible,laboratorio:medicamento.laboratorio}),
+      {
+        headers: headers
+      }
+    ).map(res => res.json()).do(data => {this.medicamentosLista[this.localizarPorId(-1)].idMedicamento = data.id;}).catch(this.handleErrors);
   }
 
   // Modifica un medicamento
@@ -88,9 +98,18 @@ export class DatosService {
      }
      */
 // Simplemente se manda la peticion al servidor, en el cliente no es necesario modificar el dato gracias al two way data binding
+  this.cargando = true;
+  let headers = new Headers();
+  headers.append("AuthToken", Configuracion.token); // Token obtenido del login
+  return this.http.put(Configuracion.apiBaseUrl+"modificar",JSON.stringify({id:medicamento.idMedicamento,nombre:medicamento.nombreMedicamento,cantidad:medicamento.cantidadDisponible,laboratorio:medicamento.laboratorio}),
+    {
+      headers: headers
+    }
+  ).catch(this.handleErrors);
   }
 
   obtenerLaboratorios(){
+    this.cargando = true;
     let headers = new Headers();
     headers.append("AuthToken", Configuracion.token); // Token obtenido del login, campo estatico de clase
 
@@ -116,6 +135,13 @@ export class DatosService {
     this.medicamentosLista.splice(this.localizarPorId(id),1); // Se elimina el elemento del array
 
     // Se procede a borrarlo de la base de datos en el servidor..., hacer llamada a la API...
+    this.cargando = true;
+    let headers = new Headers();
+    headers.append("AuthToken", Configuracion.token); // Token obtenido del login, campo estatico de clase
+
+    return this.http.delete(Configuracion.apiBaseUrl + "borrar/"+id ,{
+      headers: headers
+    }).catch(this.handleErrors);
   }
 
   public localizarPorId(id: number):number{

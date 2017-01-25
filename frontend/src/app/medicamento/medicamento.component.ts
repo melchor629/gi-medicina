@@ -35,7 +35,7 @@ export class MedicamentoComponent{
   }
 
   borrar(){ // permite borrar un elemento, tras eso se lanzar
-    this.servicioDatos.borrar(this.medicamento.idMedicamento);
+    this.servicioDatos.borrar(this.medicamento.idMedicamento).subscribe(()=>{this.servicioDatos.cargando = false;},(error)=>{console.log("Vaya! Error borrando: "+error)});
   }
 
   cumpleCriterio():boolean{

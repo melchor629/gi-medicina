@@ -38,8 +38,8 @@ export class LoginService {
 
       // A continuacion se crea el json
       JSON.stringify({
-        usuario: nombre,
-        pass: pass,
+        nombre: nombre,
+        password: pass,
       }),
       { headers: headers } // Se añade el header para indicar que se manda un JSON al servidor
     )

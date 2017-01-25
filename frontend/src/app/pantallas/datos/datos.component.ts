@@ -25,10 +25,12 @@ export class DatosComponent implements OnInit{
   busquedaNombre: string;
   usuario: Usuario; // Servicio login es un singleton, de ahi que en esta pagina siga el objeto...
   listaMedicamentos: any;
+  cargaDatos: boolean;
 
   constructor(private servicioLogin: LoginService, private router: Router, private servicioDatos: DatosService, private dialogo: MdDialog) { // Inyeccion de dependencias de angular, el servicio deberia ser singleton
     this.usuario = servicioLogin.usuario;
     this.listaMedicamentos = servicioDatos.medicamentosLista;
+    this.cargaDatos = this.servicioDatos.cargando;
   }
 
   logout(): void{
@@ -46,6 +48,7 @@ export class DatosComponent implements OnInit{
   else {
       this.servicioDatos.obtenerLista().subscribe(
         () => {
+          this.servicioDatos.cargando = false;
         }, // Si exito no se hace nada, // Hay que actualizar la referencia, que al finalno es necesario por el trcuo de vaciar el array: array.length = 0;
         (error) => {
           alert("Oh, vaya! Ha habido un error cargando la lista, mira la consola para mas detalles...");
@@ -54,7 +57,7 @@ export class DatosComponent implements OnInit{
       );
 
       // Ademas es necesario obtener la lista de laboratorios
-      this.servicioDatos.obtenerLaboratorios().subscribe(() => {}, (error) => {console.log(error);alert("Vaya!, Ha habido un error obteniendo los laboratorios, intentalo de nuevo...");});
+      this.servicioDatos.obtenerLaboratorios().subscribe(() => {this.servicioDatos.cargando = false;}, (error) => {console.log(error);alert("Vaya!, Ha habido un error obteniendo los laboratorios, intentalo de nuevo...");});
     }
 
   }
@@ -81,7 +84,7 @@ export class DatosComponent implements OnInit{
     /*referenciaDialogo.afterClosed.then(result => {
       console.log(`Dialog result: ${result}`); // Pizza!
     });*/
-    referenciaDialogo.afterClosed().subscribe(() => {this.servicioDatos.modificar(medicamento);});
+    referenciaDialogo.afterClosed().subscribe(() => {this.servicioDatos.modificar(medicamento).subscribe(()=>{this.servicioDatos.cargando=false;},(error)=>{console.log("Vaya! Error borrando..."+error)});});
   }
 
   mostrarFormularioCreacion(){
@@ -93,6 +96,6 @@ export class DatosComponent implements OnInit{
     referenciaDialogo.componentInstance.medicamento = medicamento;
     referenciaDialogo.componentInstance.modo = true;
     referenciaDialogo.componentInstance.listaLaboratorios = this.servicioDatos.listaLaboratorios;
-    referenciaDialogo.afterClosed().subscribe(() => {this.servicioDatos.insertar(medicamento);});
+    referenciaDialogo.afterClosed().subscribe(() => {this.servicioDatos.insertar(medicamento).subscribe(()=>{this.servicioDatos.cargando=false;},(error)=>{console.log("Vaya! Ha habido un error...")});});
   }
 }
