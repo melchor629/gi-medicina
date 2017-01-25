@@ -25,12 +25,10 @@ export class DatosComponent implements OnInit{
   busquedaNombre: string;
   usuario: Usuario; // Servicio login es un singleton, de ahi que en esta pagina siga el objeto...
   listaMedicamentos: any;
-  cargaDatos: boolean;
 
-  constructor(private servicioLogin: LoginService, private router: Router, private servicioDatos: DatosService, private dialogo: MdDialog) { // Inyeccion de dependencias de angular, el servicio deberia ser singleton
+  constructor(private servicioLogin: LoginService, private router: Router, public servicioDatos: DatosService, private dialogo: MdDialog) { // Inyeccion de dependencias de angular, el servicio deberia ser singleton
     this.usuario = servicioLogin.usuario;
     this.listaMedicamentos = servicioDatos.medicamentosLista;
-    this.cargaDatos = this.servicioDatos.cargando;
   }
 
   logout(): void{

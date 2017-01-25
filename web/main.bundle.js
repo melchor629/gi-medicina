@@ -26,7 +26,7 @@ var Medicamento = (function () {
     }
     return Medicamento;
 }());
-//# sourceMappingURL=/home/mataillo/Escritorio/gi-medicina/frontend/src/medicamento.model.js.map
+//# sourceMappingURL=/home/desarrollo/RepositorioFinalGI/gi-medicina/frontend/src/medicamento.model.js.map
 
 /***/ }),
 
@@ -108,7 +108,7 @@ var LoginService = (function () {
     return LoginService;
     var _a;
 }());
-//# sourceMappingURL=/home/mataillo/Escritorio/gi-medicina/frontend/src/login.service.js.map
+//# sourceMappingURL=/home/desarrollo/RepositorioFinalGI/gi-medicina/frontend/src/login.service.js.map
 
 /***/ }),
 
@@ -168,7 +168,7 @@ var DialogoFormularioComponent = (function () {
     return DialogoFormularioComponent;
     var _a, _b;
 }());
-//# sourceMappingURL=/home/mataillo/Escritorio/gi-medicina/frontend/src/dialogo-formulario.component.js.map
+//# sourceMappingURL=/home/desarrollo/RepositorioFinalGI/gi-medicina/frontend/src/dialogo-formulario.component.js.map
 
 /***/ }),
 
@@ -212,7 +212,7 @@ var DialogoComponent = (function () {
     return DialogoComponent;
     var _a;
 }());
-//# sourceMappingURL=/home/mataillo/Escritorio/gi-medicina/frontend/src/dialogo.component.js.map
+//# sourceMappingURL=/home/desarrollo/RepositorioFinalGI/gi-medicina/frontend/src/dialogo.component.js.map
 
 /***/ }),
 
@@ -232,7 +232,7 @@ var Configuracion = (function () {
     Configuracion.token = ""; // Donde se almacenara el token que se obtenga del servidor, es un campo estatico de una clase!
     return Configuracion;
 }());
-//# sourceMappingURL=/home/mataillo/Escritorio/gi-medicina/frontend/src/configuracion.js.map
+//# sourceMappingURL=/home/desarrollo/RepositorioFinalGI/gi-medicina/frontend/src/configuracion.js.map
 
 /***/ }),
 
@@ -401,7 +401,7 @@ var DatosService = (function () {
     return DatosService;
     var _a;
 }());
-//# sourceMappingURL=/home/mataillo/Escritorio/gi-medicina/frontend/src/datos.service.js.map
+//# sourceMappingURL=/home/desarrollo/RepositorioFinalGI/gi-medicina/frontend/src/datos.service.js.map
 
 /***/ }),
 
@@ -438,7 +438,7 @@ if (__WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment *
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__angular_core__["a" /* enableProdMode */])();
 }
 __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_4__app_app_module__["a" /* AppModule */]);
-//# sourceMappingURL=/home/mataillo/Escritorio/gi-medicina/frontend/src/main.js.map
+//# sourceMappingURL=/home/desarrollo/RepositorioFinalGI/gi-medicina/frontend/src/main.js.map
 
 /***/ }),
 
@@ -474,7 +474,7 @@ var AppComponent = (function () {
     ], AppComponent);
     return AppComponent;
 }());
-//# sourceMappingURL=/home/mataillo/Escritorio/gi-medicina/frontend/src/app.component.js.map
+//# sourceMappingURL=/home/desarrollo/RepositorioFinalGI/gi-medicina/frontend/src/app.component.js.map
 
 /***/ }),
 
@@ -535,7 +535,7 @@ var AppModule = (function () {
     ], AppModule);
     return AppModule;
 }());
-//# sourceMappingURL=/home/mataillo/Escritorio/gi-medicina/frontend/src/app.module.js.map
+//# sourceMappingURL=/home/desarrollo/RepositorioFinalGI/gi-medicina/frontend/src/app.module.js.map
 
 /***/ }),
 
@@ -565,7 +565,7 @@ var appRoutes = [
 var navigatableComponents = [
     __WEBPACK_IMPORTED_MODULE_2__pantallas_login_login_component__["a" /* LoginComponent */], __WEBPACK_IMPORTED_MODULE_1__pantallas_datos_datos_component__["a" /* DatosComponent */], __WEBPACK_IMPORTED_MODULE_3__medicamento_medicamento_component__["a" /* MedicamentoComponent */], __WEBPACK_IMPORTED_MODULE_4__dialogo_dialogo_component__["a" /* DialogoComponent */], __WEBPACK_IMPORTED_MODULE_5__dialogo_formulario_dialogo_formulario_component__["a" /* DialogoFormularioComponent */], __WEBPACK_IMPORTED_MODULE_5__dialogo_formulario_dialogo_formulario_component__["a" /* DialogoFormularioComponent */] // Necesario para la declaracion en el modulo, aunque no sea navegable
 ];
-//# sourceMappingURL=/home/mataillo/Escritorio/gi-medicina/frontend/src/app.routing.js.map
+//# sourceMappingURL=/home/desarrollo/RepositorioFinalGI/gi-medicina/frontend/src/app.routing.js.map
 
 /***/ }),
 
@@ -651,7 +651,7 @@ var MedicamentoComponent = (function () {
     return MedicamentoComponent;
     var _a, _b, _c, _d, _e;
 }());
-//# sourceMappingURL=/home/mataillo/Escritorio/gi-medicina/frontend/src/medicamento.component.js.map
+//# sourceMappingURL=/home/desarrollo/RepositorioFinalGI/gi-medicina/frontend/src/medicamento.component.js.map
 
 /***/ }),
 
@@ -695,7 +695,6 @@ var DatosComponent = (function () {
         this.dialogo = dialogo;
         this.usuario = servicioLogin.usuario;
         this.listaMedicamentos = servicioDatos.medicamentosLista;
-        this.cargaDatos = this.servicioDatos.cargando;
     }
     DatosComponent.prototype.logout = function () {
         __WEBPACK_IMPORTED_MODULE_2__shared_configuracion__["a" /* Configuracion */].token = ""; // Se borra el token
@@ -764,7 +763,7 @@ var DatosComponent = (function () {
     return DatosComponent;
     var _a, _b, _c, _d;
 }());
-//# sourceMappingURL=/home/mataillo/Escritorio/gi-medicina/frontend/src/datos.component.js.map
+//# sourceMappingURL=/home/desarrollo/RepositorioFinalGI/gi-medicina/frontend/src/datos.component.js.map
 
 /***/ }),
 
@@ -809,7 +808,7 @@ var LoginComponent = (function () {
     return LoginComponent;
     var _a, _b;
 }());
-//# sourceMappingURL=/home/mataillo/Escritorio/gi-medicina/frontend/src/login.component.js.map
+//# sourceMappingURL=/home/desarrollo/RepositorioFinalGI/gi-medicina/frontend/src/login.component.js.map
 
 /***/ }),
 
@@ -829,7 +828,7 @@ var Laboratorio = (function () {
     ;
     return Laboratorio;
 }());
-//# sourceMappingURL=/home/mataillo/Escritorio/gi-medicina/frontend/src/laboratorio.model.js.map
+//# sourceMappingURL=/home/desarrollo/RepositorioFinalGI/gi-medicina/frontend/src/laboratorio.model.js.map
 
 /***/ }),
 
@@ -856,7 +855,7 @@ var Permiso = (function () {
     }
     return Permiso;
 }());
-//# sourceMappingURL=/home/mataillo/Escritorio/gi-medicina/frontend/src/permiso.model.js.map
+//# sourceMappingURL=/home/desarrollo/RepositorioFinalGI/gi-medicina/frontend/src/permiso.model.js.map
 
 /***/ }),
 
@@ -892,7 +891,7 @@ var Usuario = (function () {
     };
     return Usuario;
 }());
-//# sourceMappingURL=/home/mataillo/Escritorio/gi-medicina/frontend/src/usuario.model.js.map
+//# sourceMappingURL=/home/desarrollo/RepositorioFinalGI/gi-medicina/frontend/src/usuario.model.js.map
 
 /***/ }),
 
@@ -908,7 +907,7 @@ var Usuario = (function () {
 var environment = {
     production: false
 };
-//# sourceMappingURL=/home/mataillo/Escritorio/gi-medicina/frontend/src/environment.js.map
+//# sourceMappingURL=/home/desarrollo/RepositorioFinalGI/gi-medicina/frontend/src/environment.js.map
 
 /***/ }),
 
@@ -964,7 +963,7 @@ var environment = {
 
 
 
-//# sourceMappingURL=/home/mataillo/Escritorio/gi-medicina/frontend/src/polyfills.js.map
+//# sourceMappingURL=/home/desarrollo/RepositorioFinalGI/gi-medicina/frontend/src/polyfills.js.map
 
 /***/ }),
 
@@ -1041,7 +1040,7 @@ module.exports = "<md-card *ngIf=\"!!!criterioBusqueda || cumpleCriterio()\">\n 
 /***/ 862:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"tabla maxAnchoAlto\">\n  <div class=\"fila\">\n    <div class=\"celda\"> <!-- Esta fila tiene la altura maxima...-->\n      <div style=\"background-color: #00897B; padding: 1%; color:#FFFFFF;font-size: 1.1em;\">\n        Hola! {{nombre}}, bienvenid@ al sistema.\n        <button md-raised-button style=\"margin-left: 2%; color:#202020;\" (click)=\"logout()\">Salir</button>\n      </div>\n    </div>\n  </div>\n  <div class=\"fila\">\n    <div class=\"celda\"> <!-- Esta fila tiene la altura maxima...-->\n      <div style=\"background-color: #E0E0E0; padding: 1%; color:#E1F5FE;font-size: 1.1em;\">\n        <md-input-container style=\"width: 95%;\">\n          <input md-input style=\"color: black;\" placeholder=\"Buscar medicamento...\" [(ngModel)] = \"busquedaNombre\">\n        </md-input-container>\n      </div>\n    </div>\n  </div>\n  <div class=\"fila\">\n    <div class=\"celda\" style=\"height: 100%;\"> <!-- Esta fila tiene la altura maxima...-->\n      <div style=\"position: relative; height: 100%;\">\n        <!-- Hay que usar el pipe por su nombre-->\n        <medicamento *ngFor=\"let medicamento of listaMedicamentos\" [medicamento]=\"medicamento\" [criterioBusqueda]=\"busquedaNombre\" (verDetalles)=\"mostrarDialogoVer($event)\" (editarMedicamento)=\"mostrarFormularioEdicion($event)\"></medicamento>\n\n        <button (click) = \"mostrarFormularioCreacion()\" *ngIf=\"usuario.permisoPantalla('lista').modificacion\" md-fab style=\"position: absolute; right: 5px; bottom: 5px;\"><md-icon>add</md-icon></button>\n      </div>\n    </div>\n  </div>\n  <div class=\"fila\">\n    <div class=\"celda\"> <!-- Esta fila tiene la altura maxima...-->\n      <div style=\"background-color: #607D8B; padding: 1%; color:#ECEFF1;font-size: 1.1em; text-align: center\">Gestión de la Información - Trabajo en grupo curso 2016 - 2017</div>\n    </div>\n  </div>\n</div>\n\n<!-- Overlay del loader -->\n<div *ngIf=\"cargaDatos\" style=\"position: fixed; top: 0px; bottom: 0px; left: 0px;right: 0px; background-color: rgba(0, 0, 0, 0.3);\">\n  <div class=\"tabla maxAnchoAlto\">\n    <div class=\"fila\">\n      <div class=\"celda alineacionVertical\" style=\"text-align: center;\">\n        <div style=\"display: inline-block;\">\n          <md-spinner></md-spinner>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
+module.exports = "<div class=\"tabla maxAnchoAlto\">\n  <div class=\"fila\">\n    <div class=\"celda\"> <!-- Esta fila tiene la altura maxima...-->\n      <div style=\"background-color: #00897B; padding: 1%; color:#FFFFFF;font-size: 1.1em;\">\n        Hola! {{nombre}}, bienvenid@ al sistema.\n        <button md-raised-button style=\"margin-left: 2%; color:#202020;\" (click)=\"logout()\">Salir</button>\n      </div>\n    </div>\n  </div>\n  <div class=\"fila\">\n    <div class=\"celda\"> <!-- Esta fila tiene la altura maxima...-->\n      <div style=\"background-color: #E0E0E0; padding: 1%; color:#E1F5FE;font-size: 1.1em;\">\n        <md-input-container style=\"width: 95%;\">\n          <input md-input style=\"color: black;\" placeholder=\"Buscar medicamento...\" [(ngModel)] = \"busquedaNombre\">\n        </md-input-container>\n      </div>\n    </div>\n  </div>\n  <div class=\"fila\">\n    <div class=\"celda\" style=\"height: 100%;\"> <!-- Esta fila tiene la altura maxima...-->\n      <div style=\"position: relative; height: 100%;\">\n        <!-- Hay que usar el pipe por su nombre-->\n        <medicamento *ngFor=\"let medicamento of listaMedicamentos\" [medicamento]=\"medicamento\" [criterioBusqueda]=\"busquedaNombre\" (verDetalles)=\"mostrarDialogoVer($event)\" (editarMedicamento)=\"mostrarFormularioEdicion($event)\"></medicamento>\n\n        <button (click) = \"mostrarFormularioCreacion()\" *ngIf=\"usuario.permisoPantalla('lista').modificacion\" md-fab style=\"position: absolute; right: 5px; bottom: 5px;\"><md-icon>add</md-icon></button>\n      </div>\n    </div>\n  </div>\n  <div class=\"fila\">\n    <div class=\"celda\"> <!-- Esta fila tiene la altura maxima...-->\n      <div style=\"background-color: #607D8B; padding: 1%; color:#ECEFF1;font-size: 1.1em; text-align: center\">Gestión de la Información - Trabajo en grupo curso 2016 - 2017</div>\n    </div>\n  </div>\n</div>\n\n<!-- Overlay del loader -->\n<div *ngIf=\"servicioDatos.cargando\" style=\"position: fixed; top: 0px; bottom: 0px; left: 0px;right: 0px; background-color: rgba(0, 0, 0, 0.3);\">\n  <div class=\"tabla maxAnchoAlto\">\n    <div class=\"fila\">\n      <div class=\"celda alineacionVertical\" style=\"text-align: center;\">\n        <div style=\"display: inline-block;\">\n          <md-spinner></md-spinner>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
