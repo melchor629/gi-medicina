@@ -71,9 +71,9 @@ module.exports = (app, connection) => {
     });
     
     //ruta borrar
-    app.delete('/borrar',(req,res)=>{
+    app.delete('/borrar/:id',(req,res)=>{
         let mediRepo = connection.getRepository("medicamento");
-        mediRepo.find({ID_MEDICAMENTO: req.body.id}).then( r => {
+        mediRepo.find({ID_MEDICAMENTO: req.params.id}).then( r => {
             mediRepo.remove(r).then(() => {
                 res.json({ok:true});
             }).catch(e => {
@@ -86,7 +86,7 @@ module.exports = (app, connection) => {
     });
     
     //ruta modificar
-    app.post('/modificar',(req,res)=>{
+    app.put('/modificar',(req,res)=>{
      let mediRepo = connection.getRepository("medicamento");
      let medicamentoModificar = {
             "ID_MEDICAMENTO":req.body.id,
