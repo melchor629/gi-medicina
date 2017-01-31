@@ -30,6 +30,8 @@ Proyecto para Gestión de la Información sobre medicinas y esas cosas
         | package.json
         | index.html
         | ...
+    \ frontend
+        | ...
 ```
 
 **entities**: Contiene el mapeo BD-node.js de las tablas
@@ -37,6 +39,8 @@ Proyecto para Gestión de la Información sobre medicinas y esas cosas
 **models**: Contiene objetos que representan las tablas de la BD
 
 **web**: Contiene la aplicación web para manejar la BD
+
+**frontend**: Contiene el código fuente de la web
 
 **index.js**: Servidor web
 
