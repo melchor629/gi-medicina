@@ -1,6 +1,13 @@
 # gi-medicina
 Proyecto para Gestión de la Información sobre medicinas y esas cosas
 
+## Ejecutar la aplicación
+Primero se ha de crear la base de datos y rellenar con datos. En la carpeta `sql` se encuentran los diversos SQL para crear la estructura y rellenar con datos. El servidor supone que el usuario es `root` y que la contraseña es `pato`. Se puede modificar en `index.js` estos parámetros (_lineas 24 y 25_).
+
+Hay que instalar las dependencias de node.js, simplemente con el comando `npm install` se consigue obtener las dependencias mencionadas.
+
+Una vez se tenga lo anterior listo, se puede ejecutar el servidor con `node index`.
+
 ## Estructura
 ```
     | .gitignore
